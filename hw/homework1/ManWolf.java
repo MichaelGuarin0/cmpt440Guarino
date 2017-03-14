@@ -32,9 +32,6 @@ public class ManWolf {
         scanner.useDelimiter(",");
         while(scanner.hasNext()){
             String data = scanner.next();
-            System.out.println(data);
-            System.out.println("next string");
-            /*
             if(colIndex == 0)
                 tranTable[rowIndex][colIndex] = data;
             else if(colIndex == 1)
@@ -45,11 +42,18 @@ public class ManWolf {
                 tranTable[rowIndex][colIndex] = data;
             else if(colIndex == 4)
                 tranTable[rowIndex][colIndex] = data;
-            colIndex ++;*/
+            colIndex ++;
         }
-        //colIndex = 0;
-       //rowIndex ++;
+        colIndex = 0;
+        rowIndex ++;
     }
     reader.close();
+    //check to see what's inside
+    for(int rowcount = 0; rowcount < tranTable.length; rowcount++){
+        for(int count = 0; count < tranTable[0].length; count++){
+            System.out.print(tranTable[rowcount][count]);
+        }
+            System.out.println("next row");
+    }
   }
 }
