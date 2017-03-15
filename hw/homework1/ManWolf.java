@@ -16,44 +16,73 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class ManWolf {
 //takes a string from the command line and reports whether or not it represents a solution to the man-wolf-goat-cabbage problem
-  public void openCSV() throws IOException{
+public class ManWolf {
+  //reads in csv and creates grade translation table
+  private int[][] createTransTable() throws IOException{
     //open file input stream
     BufferedReader reader = new BufferedReader(new FileReader("stateTransitions.csv"));
     String line = null;
     Scanner scanner = null;
     int rowIndex = 0;
     int colIndex = 0;
-    String[][] tranTable = new String[12][5];
+    int[][] transTable = new int[11][4];
     //read file line by line
     while((line = reader.readLine()) != null){
         scanner = new Scanner(line);
         scanner.useDelimiter(",");
         while(scanner.hasNext()){
-            String data = scanner.next();
+            int data = scanner.nextInt();
             if(colIndex == 0)
-                tranTable[rowIndex][colIndex] = data;
+                transTable[rowIndex][colIndex] = data;
             else if(colIndex == 1)
-                tranTable[rowIndex][colIndex] = data;
+                transTable[rowIndex][colIndex] = data;
             else if(colIndex == 2)
-                tranTable[rowIndex][colIndex] = data;
+                transTable[rowIndex][colIndex] = data;
             else if(colIndex == 3)
-                tranTable[rowIndex][colIndex] = data;
-            else if(colIndex == 4)
-                tranTable[rowIndex][colIndex] = data;
+                transTable[rowIndex][colIndex] = data;
             colIndex ++;
         }
         colIndex = 0;
         rowIndex ++;
     }
     reader.close();
-    //check to see what's inside
-    for(int rowcount = 0; rowcount < tranTable.length; rowcount++){
-        for(int count = 0; count < tranTable[0].length; count++){
-            System.out.print(tranTable[rowcount][count]);
-        }
-            System.out.println("next row");
+    return transTable;
+  }
+
+  //makes one transition for each character recieved in a given input string
+  public boolean process(String input){
+    //create transition table from csv
+    int[][] transTable = null;
+    try{
+      transTable = createTransTable();
     }
+    catch(IOException e){
+        System.out.println(e.getMessage());
+    }
+    String[] transInput = translateInput(input);
+    int state = 0;
+    for(int count = 0; count < transInput.length; count++){
+      state = transTable[state][Integer.parseInt(transInput[count])];
+    }
+    return accepted(state);
+  }
+
+  //helper function process to tranlate input string into format accepted by grade translation table
+  private String[] translateInput(String input){
+    //translate to correct column from char
+    String[] splitInput = input.replaceAll("n", Integer.toString(0)).replaceAll("w", Integer.toString(1)).replaceAll("g", Integer.toString(2)).replaceAll("c", Integer.toString(3)).split("");
+    return splitInput;
+  }
+
+  //check if string was accepted
+  private boolean accepted(int state){
+    //takes in state then determines if ends in an accepting state
+    return state == 9;
+  }
+
+  //validate input from command line args
+  public static boolean validateInput(String args){
+        return args.matches("[nwgc]+");
   }
 }

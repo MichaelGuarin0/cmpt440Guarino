@@ -12,12 +12,21 @@ import java.io.IOException;
 
 public class driverDFA{
   public static void main(String[] args){
-    ManWolf test = new ManWolf();
-    try{
-      test.openCSV();
+    //is command line input valid
+    if(args.length == 0){
+      System.out.println("Please enter input.");
     }
-    catch(IOException e){
-        System.out.println(e.getMessage());
+    else if(! ManWolf.validateInput(args[0])){
+      System.out.println("This is not valid input.");
+    }
+    else{
+      ManWolf test = new ManWolf();
+      if(test.process(args[0])){
+        System.out.println("This is a solution.");
+      }
+      else{
+        System.out.println("This is not a solution.");
+      }
     }
   }
 }
