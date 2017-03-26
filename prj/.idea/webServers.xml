@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9ca76552-ff97-4050-8e6d-a4a616d08175" name="numbersherpa" url="http://numbersherpa">
+        <fileTransfer host="numbersherpa" port="22" rootFolder="/home/michael/Documents/Repositories/cmpt440Guarino/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
