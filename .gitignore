@@ -1,0 +1,4 @@
+#ignore this stuff
+*.DS_Store
+*.idea
+*.class
