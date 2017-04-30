@@ -1,0 +1,17 @@
+{
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": true,
+  "hostname": "numbersherpa",
+  "port": "22",
+  "target": "/home/michael/Documents/Repositories/cmpt440Guarino/prj",
+  "source": "/prj",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "michael",
+  "password": "Mjg**4736251",
+  "watch": [],
+  "transport": "scp"
+}
