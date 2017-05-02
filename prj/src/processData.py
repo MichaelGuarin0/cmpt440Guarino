@@ -10,18 +10,17 @@ import numpy as np
 from nltk.tokenize import StanfordTokenizer
 from utils import DATA_DIR
 
-class ProcessData:
+class processData:
 
-    def __init__():
+    def __init__(self):
         '''
         desc:
         args:
         returns:
         '''
-        dtm_builder()
     #end
 
-    def _readFile(file):
+    def _readFile(self, file):
         '''
         desc:
         args:
@@ -29,12 +28,12 @@ class ProcessData:
         '''
         with open(file) as data:
             txtDoc = data.read()
-        txtDoc = re.sub('[.!?]\s+', '<eos>', txtDoc)
+        txtDoc = re.sub('[.!?]\s+', '<eos> <sos>', txtDoc)
         txtDoc = re.sub('[,-]', '', txtDoc)
         return txtDoc
     #end
 
-    def _buildVocLookUp(txtDocTok):
+    def _buildVocLookUp(self, txtDocTok):
         '''
         desc:
         args:
@@ -45,7 +44,7 @@ class ProcessData:
         return unqVoc_LookUp
     #end
 
-    def _oneHotEncode(txtDocTok, unqVoc_LookUp):
+    def _oneHotEncode(self, txtDocTok, unqVoc_LookUp):
         '''
         desc: one hot encodes entire document
         args:
@@ -64,7 +63,7 @@ class ProcessData:
         return txtDocOHE
     #end
 
-    def oneHotDecode(inputOHE, unqVoc_LookUp):
+    def oneHotDecode(self, inputOHE, unqVoc_LookUp):
         '''
         desc: decodes single one hot encoded input value
         args:
@@ -75,17 +74,21 @@ class ProcessData:
         return decodedClass
     #end
 
-    def dtm_builder():
+    def dtm_builder(self):
         '''
         desc:
         args:
         returns:
         '''
         dataFiles = ['{}/{}'.format(DATA_DIR, file) for file in os.listdir(DATA_DIR) if file.endswith('.txt')]
-        allTxtDocs = '<eod>'.join([_readFile(file) for file in dataFiles])
+        allTxtDocs = '<eod>'.join([self._readFile(file) for file in dataFiles])
         allTxtDocsTok = StanfordTokenizer().tokenize(allTxtDocs)
-        unqVoc_LookUp = _buildVocLookUp(allTxtDocsTok)
-        allTxtDocsTok_OHE = _oneHotEncode(allTxtDocsTok, unqVoc_LookUp)
-        #allTxtDocs_OHD = [oneHotDecode(exp, unqVoc_LookUp) for exp in allTxtDocsTok_OHE]
+        unqVoc_LookUp = self._buildVocLookUp(allTxtDocsTok)
+        allTxtDocs_allseq = '||*||'.join(allTxtDocsTok).split('<eos>')
+        allTxtDocs_byseq = [seq.split('||*||') for seq in allTxtDocs_allseq]
+        allTxtDocs_byseq = [list(filter(None, seq)) for seq in allTxtDocs_byseq]
+        for seq in allTxtDocs_byseq: seq.append('<eos>')
+        allTxtDocsTok_OHE = [self._oneHotEncode(seq, unqVoc_LookUp) for seq in allTxtDocs_byseq]
+        return allTxtDocsTok_OHE
     #end
 #end
