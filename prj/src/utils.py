@@ -1,3 +1,9 @@
+'''
+@author: Michael Guarino
+desc: this file contains all constants that are shared throughout the
+      project
+'''
+
 import os
 
 #project paths
@@ -7,3 +13,5 @@ LIB_DIR = '{}/{}'.format(PRJ_DIR, 'lib')
 DATA_DIR = '{}/{}'.format(LIB_DIR, 'data')
 
 #project constants
+SEQUENCE_LENGTH = 30
+EPOCHS = 50
