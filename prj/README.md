@@ -1,11 +1,8 @@
-# TextAnalysis_IBMCognitivePrediction
+# cmpt440 Formal Language Study Project
 
 Overview
 ============
-This project is a Sequence to Sequence model build in Keras using Tensorflow as it's back end.
-
-This Repo
-============
+This project is a Sequence to Sequence model built in Keras using Tensorflow as it's back end.
 
 Dependencies
 ============
