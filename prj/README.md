@@ -37,7 +37,3 @@ Dependencies
     <li>Stanford Tokenizer:
     <li>Speech Data contained in this repo</li>
 </ul>
-
-Output
-============
-ssh michael@100.40.189.190
