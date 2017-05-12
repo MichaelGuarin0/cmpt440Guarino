@@ -1,0 +1,12 @@
+50 pts
+
+The project attempts to extract states from a Recurrent Neural Network
+architecture, Long Short Term Memory, to assemble rules that govern transitions
+between states in a Deterministic Finite Automata.
+The idea has good merit. 
+
+Overall:
+- Decent work well above average of a formal languages student. -10pts
+
+Would you be interested in presenting this at an undergrad conference in MIT 
+in the fall? Let me know.
